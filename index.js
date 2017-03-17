@@ -18,9 +18,12 @@ const Alexa = require('alexa-sdk');
 const Parts = require('./parts');
 const Ideas = require('./ideas');
 const CALLIOPE = '<phoneme alphabet="ipa" ph="kalɪo:pɛ">Calliope</phoneme>';
+const GROVE = '<phoneme alphabet="ipa" ph="gɹov konnɛkto:ren">Grove-Connectoren</phoneme>';
 
 function pronounce(text) {
-    return text.replace(/Calliope/, CALLIOPE);
+    return text
+        .replace(/Calliope/, CALLIOPE)
+        .replace(/Grove-Connectoren/, GROVE);
 }
 
 const handlers = {
@@ -40,10 +43,10 @@ const handlers = {
         const part = this.event.request.intent.slots.Part;
 
         if (part && Parts.parts[part.value]) {
-            this.emit(':tell', pronounce(Parts.parts[part.value.toLowerCase()]));
+            this.emit(':tell', pronounce(Parts.parts[part.value]));
         }
         else {
-            this.emit(':tell', pronounce('Auf der Platine des Calliope mini findest du Lämpchen, Knöpfe, Sensoren, Ecken, USB, Bluetooth, Lautsprecher, Mikrofon, Prozessor, Grove-Connectoren und zwei Motor-Anschlüsse.'));
+            this.emit(':tell', pronounce('Auf der Platine des Calliope mini findest du Lämpchen, Knöpfe, Sensoren, Ecken, USB, Bluetooth, Lautsprecher, Mikrofon, Prozessor, Verbindungsstecker und zwei Motor-Anschlüsse.'));
         }
     },
 
